@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GD Arena – AI Group Discussion Battle</title>
+<meta name="description" content="A voice-first room for practising group discussions with AI participants.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23F4B547' stroke-width='3' stroke-dasharray='15 4'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23F4B547'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#/home" aria-label="GD Arena home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-dasharray="15 4"/><circle cx="16" cy="16" r="4.6" fill="currentColor"/></svg>
+      <span>GD Arena</span>
+    </a>
+    <nav class="tabs" id="tabs" aria-label="Sections">
+      <a href="#/home" data-route="home">Home</a>
+      <a href="#/profile" data-route="profile" data-host>Profile</a>
+      <a href="#/topics" data-route="topics" data-host>Topics</a>
+      <a href="#/arena" data-route="arena">Arena</a>
+      <a href="#/report" data-route="report">Report</a>
+      <a href="#/dashboard" data-route="dashboard" data-host>Dashboard</a>
+    </nav>
+    <div class="nav-right">
+      <span class="conn" id="conn" title="Connection status"><i></i><span id="conn-text">Connecting…</span></span>
+      <span class="xp-chip" id="xp-chip" data-host title="Level and XP">Lv 1 · 0 XP</span>
+      <button class="btn sm primary" id="nav-demo" type="button" data-host>Try Demo</button>
+    </div>
+  </div>
+</header>
+
+<div class="viewer-bar" id="viewer-bar" hidden>
+  <div class="wrap viewer-in">
+    <span class="live-dot"></span>
+    <span id="viewer-text">Watching a live room</span>
+    <button class="btn sm" id="viewer-audio" type="button">Turn on AI voices</button>
+  </div>
+</div>
+
+<main class="wrap" id="main">
+
+  <!-- ============ HOME ============ -->
+  <section class="view" data-view="home">
+    <div class="hero">
+      <div class="hero-copy">
+        <span class="chip accent">Voice-first · Speech in, speech out</span>
+        <h1 class="hero-title">Speak.<br>Think.<br><em>Lead.</em></h1>
+        <p class="lede">Train for real-world group discussions with AI participants that challenge your communication skills.</p>
+        <div class="row gap">
+          <button class="btn primary lg" id="home-enter" type="button">Enter GD Arena
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+          <button class="btn lg" id="home-demo" type="button">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.5v11l9-5.5z"/></svg>Try Demo</button>
+        </div>
+        <div class="meta"><span>4 AI participants with their own voices</span><span>Live over WebSockets</span><span>No login, no API key</span></div>
+      </div>
+      <div class="table-vis" aria-hidden="true">
+        <div class="table-ring"></div>
+        <div class="table-ring r2"></div>
+        <div class="table-core"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>Round 1</span></div>
+        <div class="seat" style="--a:-90deg;--c:#7AA8FF;--d:0s"><b>A</b><span>Aarav</span><i class="eq"><i></i><i></i><i></i><i></i></i></div>
+        <div class="seat" style="--a:-18deg;--c:#FF7A6B;--d:1.2s"><b>R</b><span>Riya</span><i class="eq"><i></i><i></i><i></i><i></i></i></div>
+        <div class="seat" style="--a:54deg;--c:#43D9B0;--d:2.4s"><b>K</b><span>Kabir</span><i class="eq"><i></i><i></i><i></i><i></i></i></div>
+        <div class="seat you" style="--a:126deg;--c:#F4B547;--d:3.6s"><b>You</b><span>You</span><i class="eq"><i></i><i></i><i></i><i></i></i></div>
+        <div class="seat" style="--a:198deg;--c:#C49BFF;--d:4.8s"><b>M</b><span>Meera</span><i class="eq"><i></i><i></i><i></i><i></i></i></div>
+      </div>
+    </div>
+
+    <div class="features">
+      <article class="card feature">
+        <div class="f-icon" style="--c:#7AA8FF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 19c.8-3 2.8-4.5 5-4.5s4.2 1.5 5 4.5M11 19c.8-3 2.8-4.5 5-4.5s4.2 1.5 5 4.5"/></svg></div>
+        <h3>AI Participants</h3>
+        <p>An Analyst, a Challenger, a Collaborator and a Devil’s Advocate. Each speaks in its own voice and reacts to what you actually said.</p>
+      </article>
+      <article class="card feature">
+        <div class="f-icon" style="--c:#43D9B0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h3l2-6 4 12 2-6h7"/></svg></div>
+        <h3>Real-time Performance Analysis</h3>
+        <p>As you speak, your live transcript streams to the engine, which updates speaking time, arguments, counterarguments and examples.</p>
+      </article>
+      <article class="card feature">
+        <div class="f-icon" style="--c:#F4B547"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></div>
+        <h3>Adaptive Practice</h3>
+        <p>The engine finds your weakest skill and rebuilds the next round around it, then measures how much you improved.</p>
+      </article>
+    </div>
+
+    <section class="engine-sec card">
+      <div class="sec-head">
+        <span class="chip accent">Adaptive AI Training Engine</span>
+        <h2>Not topic → GD → score. A loop that trains your weak spot.</h2>
+      </div>
+      <div class="loop big" data-loop></div>
+      <div class="pipeline">
+        <span class="k">Voice pipeline</span>
+        <ol>
+          <li><b>Your voice</b><span>Microphone</span></li>
+          <li><b>Speech-to-text</b><span>In the browser</span></li>
+          <li><b>WebSocket</b><span>Live transcript stream</span></li>
+          <li><b>Engine</b><span>Scores and replies</span></li>
+          <li><b>Text-to-speech</b><span>Four AI voices</span></li>
+        </ol>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ PROFILE ============ -->
+  <section class="view" data-view="profile" hidden>
+    <div class="page-head"><span class="eyebrow">Step 1 · Your profile</span><h2>Tell us who is practising</h2></div>
+    <div class="grid-2">
+      <form class="card form" id="profile-form" novalidate>
+        <label for="pf-name">Name</label>
+        <input id="pf-name" name="name" autocomplete="name" placeholder="e.g. Aman" required>
+        <label for="pf-college">College</label>
+        <input id="pf-college" name="college" placeholder="e.g. MNIT Jaipur">
+        <div class="two">
+          <div><label for="pf-year">Year</label>
+            <select id="pf-year" name="year"><option>1st year</option><option>2nd year</option><option selected>3rd year</option><option>4th year</option><option>Postgraduate</option><option>Graduate</option></select></div>
+          <div><label for="pf-target">Target</label>
+            <select id="pf-target" name="target"><option>Placement</option><option>Internship</option><option>MBA</option><option>General Communication</option></select></div>
+        </div>
+        <label for="pf-lang">Speech recognition accent</label>
+        <select id="pf-lang" name="lang"><option value="en-IN">English (India)</option><option value="en-US">English (US)</option><option value="en-GB">English (UK)</option></select>
+        <p class="err" id="pf-err" hidden></p>
+        <div class="row gap"><button class="btn primary" type="submit">Save and choose a topic</button><span class="muted small" id="pf-saved"></span></div>
+      </form>
+      <div class="card">
+        <div class="card-head"><h3>Communication Profile</h3><span class="chip" id="cp-src">Not measured yet</span></div>
+        <div class="bars" id="cp-bars"></div>
+        <p class="muted small" id="cp-note">Complete your first discussion to measure these six skills.</p>
+        <div class="level-box" id="pf-level"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TOPICS ============ -->
+  <section class="view" data-view="topics" hidden>
+    <div class="page-head"><span class="eyebrow">Step 2 · Choose a topic</span><h2>Pick your battle</h2></div>
+    <div class="voice-check" id="voice-check"></div>
+    <div class="filters" id="filters" role="tablist" aria-label="Topic categories"></div>
+    <div class="topic-grid" id="topic-grid"></div>
+  </section>
+
+  <!-- ============ ARENA ============ -->
+  <section class="view" data-view="arena" hidden>
+    <div class="empty card" id="arena-empty">
+      <h3>No discussion running</h3>
+      <p class="muted">Pick a topic to start round 1 with four AI participants.</p>
+      <button class="btn primary" type="button" data-go="topics">Choose a topic</button>
+    </div>
+    <div id="arena-live" hidden>
+      <div class="arena-top">
+        <div class="at-left">
+          <span class="chip" id="round-chip">Round 1 · Open discussion</span>
+          <h2 id="arena-title">Topic</h2>
+        </div>
+        <div class="at-right">
+          <span class="timer mono" id="timer" title="Discussion time">00:00</span>
+          <button class="btn sm" id="share" type="button" data-host>Share live view</button>
+        </div>
+      </div>
+      <div class="share-pop card" id="share-pop" hidden>
+        <p class="small muted">Anyone on the same network can watch this discussion live, read-only. <b id="watchers">0 watching</b></p>
+        <div class="row gap"><input id="share-url" readonly aria-label="Live view link"><button class="btn sm primary" id="share-copy" type="button">Copy link</button></div>
+      </div>
+      <div class="loop compact" data-loop></div>
+
+      <div class="arena-grid">
+        <aside class="people" id="people" aria-label="Participants"></aside>
+
+        <div class="center card">
+          <div class="challenge" id="challenge" hidden>
+            <div class="row gap wrap-row"><span class="chip hot" id="ch-chip">Challenge Mode</span><span class="chip mono" id="ch-base"></span><span class="countdown mono" id="ch-count" hidden>20</span></div>
+            <p class="ch-task" id="ch-task"></p>
+            <div class="moves" id="ch-moves"></div>
+          </div>
+          <div class="feed" id="feed" aria-live="polite"></div>
+          <div class="live-line" id="live-line" hidden>
+            <canvas id="wave" width="120" height="32" aria-hidden="true"></canvas>
+            <p><b id="live-who">You</b> <span id="live-text">Listening…</span></p>
+          </div>
+          <div class="composer" id="composer" data-host>
+            <label class="sr" for="answer">Your response</label>
+            <textarea id="answer" placeholder="Type your response…" disabled></textarea>
+            <div class="comp-row">
+              <button class="btn mic" id="speak" type="button" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+                <span id="speak-label">Speak</span></button>
+              <button class="btn primary" id="submit" type="button" disabled>Submit Response</button>
+              <button class="btn ghost" id="end" type="button" disabled>End Discussion</button>
+              <span class="grow"></span>
+              <span class="small muted" id="wc">0 words</span>
+            </div>
+            <div class="comp-row toggles">
+              <label class="toggle"><input type="checkbox" id="opt-voices" checked><span></span>AI voices</label>
+              <label class="toggle"><input type="checkbox" id="opt-autosend" checked><span></span>Send when I stop speaking</label>
+              <span class="small muted" id="mic-note"></span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="perf card" aria-label="Live performance">
+          <div class="card-head"><h3>Live performance</h3><span class="chip" id="perf-src">Waiting</span></div>
+          <div class="stat-grid">
+            <div class="stat"><span class="k">Speaking time</span><b class="mono" id="m-time">0:00</b><span class="s" id="m-time-s">—</span></div>
+            <div class="stat"><span class="k">Contributions</span><b class="mono" id="m-contrib">0</b><span class="s">turns taken</span></div>
+            <div class="stat"><span class="k">Arguments</span><b class="mono" id="m-args">0</b><span class="s">claims with a stance</span></div>
+            <div class="stat"><span class="k">Counterarguments</span><b class="mono" id="m-counter">0</b><span class="s">rebuttals made</span></div>
+            <div class="stat"><span class="k">Examples</span><b class="mono" id="m-ex">0</b><span class="s">cases, data, names</span></div>
+            <div class="stat"><span class="k">Pace</span><b class="mono" id="m-wpm">—</b><span class="s" id="m-wpm-s">words per minute</span></div>
+          </div>
+          <div class="balance">
+            <div class="row between"><span class="k">Participation balance</span><b class="mono" id="m-share">0%</b></div>
+            <div class="bal-track"><i id="m-share-bar"></i><span class="fair" title="Fair share for 5 people">20%</span></div>
+            <p class="s" id="m-share-s">Fair share in a group of five is about 20%.</p>
+          </div>
+          <div class="fillers"><span class="k">Fillers and hedges</span><b class="mono" id="m-fill">0</b></div>
+          <p class="small muted net" id="net"></p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REPORT / RESULTS ============ -->
+  <section class="view" data-view="report" hidden>
+    <div class="empty card" id="report-empty">
+      <h3>No report yet</h3>
+      <p class="muted">Finish a discussion and the engine will analyse it here.</p>
+      <button class="btn primary" type="button" data-go="topics">Start a discussion</button>
+    </div>
+    <div id="report-live" hidden>
+      <div class="row between wrap-row head-row"><span class="chip accent">Adaptive AI Training Engine</span><span class="small muted" id="rep-topic"></span></div>
+      <div class="loop compact" data-loop></div>
+
+      <!-- analysis -->
+      <div id="analysis" hidden>
+        <div class="weak card">
+          <div class="scanning" id="scanning"><span class="spin"></span><span id="scan-text">Analysing communication behaviour…</span></div>
+          <div class="weak-body" id="weak-body" hidden>
+            <span class="eyebrow hot">Your biggest weakness</span>
+            <h2 class="weak-title" id="weak-title">COUNTERARGUMENTS</h2>
+            <p class="weak-exp" id="weak-exp"></p>
+            <div class="row gap wrap-row">
+              <button class="btn primary lg" id="start-challenge" type="button" data-host>Start Challenge Mode
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+              <span class="small muted">The next round is rebuilt to train this one skill.</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3>Round 1 scores</h3><span class="chip mono" id="r1-overall"></span></div>
+            <div class="bars" id="r1-bars"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Weakness rules</h3><span class="chip">Rule-based, transparent</span></div>
+            <ul class="rules" id="rules"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- result -->
+      <div id="result" hidden>
+        <div class="delta card" id="delta">
+          <span class="eyebrow" id="d-skill">Counterargument</span>
+          <div class="ba">
+            <div><span class="k">Before</span><b class="mono" id="d-before">58</b></div>
+            <span class="arrow">→</span>
+            <div><span class="k">After</span><b class="mono good" id="d-after">58</b></div>
+          </div>
+          <div class="stamp" id="stamp">+18 IMPROVEMENT</div>
+          <div class="cmp-row">
+            <div class="cmp"><span class="k">Round 1 signals</span><p class="small muted" id="ev-b-note"></p><div class="qs" id="ev-b"></div></div>
+            <div class="cmp good"><span class="k">Challenge signals</span><p class="small muted" id="ev-a-note"></p><div class="qs" id="ev-a"></div></div>
+          </div>
+        </div>
+
+        <div class="report card">
+          <div class="report-head">
+            <div><span class="eyebrow">Performance report</span><h2 id="rep-name">Your report</h2><p class="muted small" id="rep-meta"></p></div>
+            <div class="overall"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" class="o-track"/><circle cx="60" cy="60" r="50" class="o-val" id="o-val"/></svg><div><b class="mono" id="o-num">0</b><span>/100</span></div></div>
+          </div>
+          <div class="grid-2 tight">
+            <div class="bars" id="rep-bars"></div>
+            <div class="sa">
+              <div><h4>Strengths</h4><ul id="strengths" class="ticks"></ul></div>
+              <div><h4>Areas to improve</h4><ul id="improve" class="ticks warn"></ul></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dna card">
+          <div class="dna-head">
+            <div><span class="eyebrow">Your Communication DNA</span><h2 id="dna-top">Critical Thinker</h2></div>
+            <span class="dna-code mono" id="dna-code"></span>
+          </div>
+          <div class="grid-2 tight">
+            <svg class="radar" id="radar" viewBox="-96 -14 452 300" role="img" aria-label="Communication DNA radar"></svg>
+            <div>
+              <div class="bars" id="dna-bars"></div>
+              <p class="dna-text" id="dna-text"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row gap wrap-row" data-host>
+          <button class="btn primary" id="train-next" type="button">Train my next weakness</button>
+          <button class="btn" id="new-gd" type="button" data-go="topics">New discussion</button>
+          <button class="btn" type="button" data-go="dashboard">Open dashboard</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DASHBOARD ============ -->
+  <section class="view" data-view="dashboard" hidden>
+    <div class="page-head row between wrap-row"><div><span class="eyebrow">Your progress</span><h2 id="dash-title">Dashboard</h2></div>
+      <button class="btn sm ghost" id="reset-progress" type="button">Reset progress</button></div>
+    <div class="confirm card" id="reset-confirm" hidden>
+      <p>Delete all saved sessions, XP and badges from this browser? This cannot be undone.</p>
+      <div class="row gap"><button class="btn sm danger" id="reset-yes" type="button">Delete progress</button><button class="btn sm" id="reset-no" type="button">Keep it</button></div>
+    </div>
+    <p class="small muted" id="dash-sample" hidden>Includes sample sessions added by the demo. Reset progress to remove them.</p>
+    <div class="tiles" id="tiles"></div>
+    <div class="grid-2 wide-left">
+      <div class="card">
+        <div class="card-head"><h3>Improvement across sessions</h3><span class="chip">Overall score</span></div>
+        <div class="chart-wrap"><svg class="chart" id="chart" viewBox="0 0 640 260" role="img" aria-label="Overall score by session"></svg></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Level</h3><span class="chip mono" id="streak">0-day streak</span></div>
+        <div class="level-box" id="dash-level"></div>
+        <h4 class="sub">Badges</h4>
+        <div class="badges" id="badges"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Session history</h3></div>
+      <div class="table-wrap"><table class="hist" id="hist"></table></div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap foot">GD Arena · AI Group Discussion Battle. Rule-based scoring, simulated AI participants, browser speech. No accounts and no database: progress stays in this browser.</footer>
+
+<div class="demo-pill" id="demo-pill" hidden>
+  <span class="live-dot"></span><span id="demo-text">Demo running</span>
+  <label class="toggle"><input type="checkbox" id="demo-voices" checked><span></span>Voices</label>
+  <button class="btn sm" id="demo-stop" type="button">Stop</button>
+</div>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<script src="../shared/engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+
